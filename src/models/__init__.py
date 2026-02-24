@@ -3,6 +3,14 @@
 from src.models.cnn_backbone import CNNBackbone
 from src.models.bilstm_encoder import BiLSTMEncoder
 from src.models.attention import AdditiveAttention
+from src.models.classification_heads import ClassificationHead, MultiTaskHeads
 from src.models.deepartnet import SpatialSequencer
 
-__all__ = ["CNNBackbone", "BiLSTMEncoder", "AdditiveAttention", "SpatialSequencer"]
+__all__ = [
+    "CNNBackbone",
+    "BiLSTMEncoder",
+    "AdditiveAttention",
+    "ClassificationHead",
+    "MultiTaskHeads",
+    "SpatialSequencer",
+]
