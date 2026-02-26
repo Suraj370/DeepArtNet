@@ -1,0 +1,30 @@
+model:
+  backbone: efficientnet_b4
+  projection_channels: 512
+  lstm_hidden: 256
+  lstm_layers: 2
+  lstm_dropout: 0.3
+  attention_dim: 512
+  head_hidden: 256
+  head_dropout: 0.4
+  pretrained: true
+
+data:
+  image_dir: data/wikiart/images
+  style_classes: 27
+  genre_classes: 10
+  artist_classes: 23
+  image_size: 224
+  num_workers: 4
+  pin_memory: true
+  style_class_file:  data/wikiart/style_class.txt
+  genre_class_file:  data/wikiart/genre_class.txt
+  artist_class_file: data/wikiart/artist_class.txt
+  style_train_csv:   data/wikiart/style_train.csv
+  style_val_csv:     data/wikiart/style_val.csv
+  genre_train_csv:   data/wikiart/genre_train.csv
+  genre_val_csv:     data/wikiart/genre_val.csv
+  artist_train_csv:  data/wikiart/artist_train.csv
+  artist_val_csv:    data/wikiart/artist_val.csv
+
+seed: 42

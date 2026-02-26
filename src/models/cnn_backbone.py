@@ -40,10 +40,12 @@ class CNNBackbone(nn.Module):
         out = backbone(x)          # (2, 512, 7, 7)
     """
 
-    # Channel counts per feature stage for EfficientNet-B4
-    _STAGE_CHANNELS: List[int] = [24, 32, 56, 160, 1792]
+    # Channel counts per feature stage for EfficientNet-B4 (features_only=True)
+    # Note: 1792 is the classifier head — not exposed by features_only.
+    # The actual last feature stage (index 4) outputs 448 channels.
+    _STAGE_CHANNELS: List[int] = [24, 32, 56, 160, 448]
     _LAST_STAGE_IDX: int = 4
-    _LAST_STAGE_CHANNELS: int = 1792
+    _LAST_STAGE_CHANNELS: int = 448
     _PROJECTION_CHANNELS: int = 512
 
     def __init__(
@@ -94,7 +96,7 @@ class CNNBackbone(nn.Module):
         """
         # backbone returns a list of 5 stage feature maps; take the last one
         stage_features: List[torch.Tensor] = self.backbone(x)
-        last_features: torch.Tensor = stage_features[self._LAST_STAGE_IDX]  # (B, 1792, 7, 7)
+        last_features: torch.Tensor = stage_features[self._LAST_STAGE_IDX]  # (B, 448, 7, 7)
         projected: torch.Tensor = self.projection(last_features)             # (B, 512, 7, 7)
         return projected
 
